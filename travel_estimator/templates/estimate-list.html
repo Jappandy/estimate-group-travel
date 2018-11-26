@@ -1,0 +1,46 @@
+{% extends 'base.html' %}<!doctype html>
+
+{% load static %}
+
+
+{% block title %} List {% endblock title %}
+
+
+{% block content %}
+<div class="container-fluid">
+{% if user.is_authenticated %}
+    <div class="extra-top-padding text-center">
+        <h1>Estimate List</h1>
+    </div>
+    
+    <ul class="list-group">
+        <li href="#" class="list-group-item d-flex justify-content-between align-items-center bg-info text-white">
+            <h5 class="list-group-item-header">ESTIMATE NAME</h5> 
+            <h5 class="list-group-item-header">TRAVEL DATE</h5> 
+            <h5 class="list-group-item-text">ACTIONS</h5>
+        </li>
+        {% for item in estimate_list %}
+        <li href="#" class="list-group-item"> 
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <h5 class="list-group-item-header">{{ item.estimate_name }}</h5>
+                <h5 class="list-group-item-text">{{ item.start_date }}</h5>
+            <div class="clickable-list-links">
+                <div p style="padding:5px">
+                    <a href="{% url 'login' %}"><i  class="fa fa-lg fa-file-pdf-o"></i></a> 
+                    <a href="{% url 'signup' %}"><i class="fa fa-lg fa-pencil"></i></a>
+                    </p>
+                </div> 
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    </div>
+{% else %}
+<p>You are not logged in</p>
+<p><a href="{% url 'login' %}">Log In</a></p>
+<p><a href="{% url 'signup' %}">Sign Up </a></p>
+</div>
+{% endif %}
+{% endblock content %}
+
+

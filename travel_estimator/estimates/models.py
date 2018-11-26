@@ -5,10 +5,11 @@ from django.utils import timezone
 from django.urls import reverse
 
 
+
 ############## AIR ##############
 
 class FlightLeg(models.Model):
-    #air_option = models.ForeignKey(AirOption, on_delete=models.CASCADE)
+    air_leg_name = models.CharField(max_length=255)
     airline = models.CharField(max_length=255)
     flight_num = models.PositiveIntegerField()
     depart_from = models.CharField(max_length=255)
@@ -17,10 +18,13 @@ class FlightLeg(models.Model):
     arrive_into = models.CharField(max_length=255)
     arrive_air_code = models.CharField(max_length=3) 
     arrive_date_time = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self):
+        return self.air_leg_name
 
     
 class AirOption(models.Model):
-    #group_air = models.ForeignKey(GroupAir, on_delete=models.CASCADE)
+    air_option_name = models.CharField(max_length=255)
     passenger_count = models.PositiveIntegerField()
     air_rate = models.DecimalField(max_digits=10, decimal_places=2) # per person
     air_fees = models.DecimalField(max_digits=10, decimal_places=2) # total fees
@@ -33,12 +37,16 @@ class AirOption(models.Model):
     departure_date = models.DateTimeField(default=timezone.now)
     return_date = models.DateTimeField(default=timezone.now)
     flight_legs = models.ManyToManyField(FlightLeg)
+    
+    def __str__(self):
+        return self.air_option_name
                 
 
 class GroupAir(models.Model):
     group_air_name = models.CharField(max_length=255)
     air_budget = models.DecimalField(max_digits=10, decimal_places=2)
-    air_option = models.ManyToManyField(AirOption)
+    group_air_options = models.ManyToManyField(AirOption)
+    
     
     def __str__(self):
         return self.group_air_name
@@ -48,7 +56,7 @@ class GroupAir(models.Model):
 ############## HOTEL ##############
 
 class HotelOption(models.Model):
-    #group_hotel = models.ForeignKey(GroupHotel, on_delete=models.CASCADE)
+    hotel_option_name = models.CharField(max_length=255)
     hotel_name = models.CharField(max_length=255)
     room_type = models.CharField(max_length=255)
     check_in = models.DateTimeField(default=timezone.now)
@@ -60,7 +68,7 @@ class HotelOption(models.Model):
     hotel_taxes = models.DecimalField(max_digits=4, decimal_places=2) # % percentage
     
     def __str__(self):
-        return self.hotel_name 
+        return self.hotel_option_name
         
 
 class GroupHotel(models.Model):
@@ -75,7 +83,7 @@ class GroupHotel(models.Model):
 ############## GROUND TRANSFER ##############
 
 class GroundOption(models.Model):
-    #group_transfer = models.ForeignKey(GroupTransfer, on_delete=models.CASCADE)
+    transfer_option_name = models.CharField(max_length=255)
     vendor_name = models.CharField(max_length=255)
     number_of_shuttles = models.PositiveIntegerField()
     transfer_rate = models.DecimalField(max_digits=10, decimal_places=2) # one way
@@ -89,7 +97,7 @@ class GroundOption(models.Model):
     
     
     def __str__(self):
-        return self.vendor_name 
+        return self.transfer_option_name
 
 
 class GroupTransfer(models.Model):
@@ -113,11 +121,18 @@ class Estimate(models.Model):
         ('C', 'Cancelled'),
     )
     
+    ESTIMATE_STATUS_CHOICES = (
+        ('P', 'Pending'),
+        ('S', 'Submitted'),
+        ('C', 'Cancelled'),
+        ('R', 'Received'),
+    )
+    
     #CITY_STATE_JSON = simplejson.dumps({name:value})[1:-1] #remove '{' and '}'
     
-    id_num = models.AutoField(primary_key=True)
-    account_num = models.CharField(max_length=255)
-    title = models.CharField(max_length=255)
+    estimate_id = models.AutoField(primary_key=True)
+    estimate_name = models.CharField(max_length=255)
+    estimate_status = models.CharField(max_length=1, choices=ESTIMATE_STATUS_CHOICES)
     details = models.TextField()
     start_date = models.DateField(default=timezone.now)
     end_date = models.DateField(default=timezone.now)
@@ -125,20 +140,19 @@ class Estimate(models.Model):
     agent = models.ForeignKey(get_user_model(),
     on_delete=models.CASCADE,
     )
-    
     payment_status = models.CharField(max_length=1, choices=PAYMENT_STATUS_CHOICES)
     destination = models.CharField(max_length=255)
     
     #############################
     ###  Estimate ManytoMany  ###
     #############################
-    group_air = models.ManyToManyField(GroupAir)
-    group_hotel = models.ManyToManyField(GroupHotel)
-    group_transfer = models.ManyToManyField(GroupTransfer)
+    group_air = models.ForeignKey(GroupAir, on_delete=models.CASCADE, blank = True, null=True)
+    group_hotel = models.ForeignKey(GroupHotel, on_delete=models.CASCADE, blank = True, null=True)
+    group_transfer = models.ForeignKey(GroupTransfer, on_delete=models.CASCADE, blank = True, null=True)
     
     
     def __str__(self):
-        return self.title
+        return self.estimate_name
     
     def get_absolute_url(self):
         return reverse('estimate_detail', args=[str(self.id)])
