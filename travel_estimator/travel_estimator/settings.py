@@ -25,7 +25,7 @@ SECRET_KEY = ')ft8^429bdhuk4$)*^ph#2fov*mwd88r^r5)xn_f!485@%gpvg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['HOSTS_INSERT_HERE']
+ALLOWED_HOSTS = ['estimate-group-travel-japandy.c9users.io']
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     
     ## 3rd PARTY APPS
     'crispy_forms',
+    
     
     #Google##Social
     'allauth', 
@@ -91,7 +92,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'travel_estimator.wsgi.application'
-
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
@@ -140,6 +141,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
@@ -159,11 +161,4 @@ ACCOUNT_USERNAME_REQUIRED = False
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = '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'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True

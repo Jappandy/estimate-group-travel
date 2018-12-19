@@ -1,0 +1,57 @@
+{% extends 'base.html' %}<!doctype html>
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Estimate Details{% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <div class="float-to-right" display="block">
+  <span><a href="/update-air-option-form/{{ object.id }}/edit" \
+    id="estimate_update_form"><i class="text-info fa fa-lg fa-pencil" style="float: right; padding-right:15px;" \
+    data-toggle="tooltip" title="Edit Estimate"> EDIT</i></a></span>
+    </div>
+<div class="container-fluid">
+  <div class="my-3" style="color:#212529">
+  <h1><center><strong>Air Option Details</strong></center></h1>
+  </div>
+    <!--{{ form|crispy }}-->
+    <hr size="1">
+    <h4><strong>Air Option Name: </strong>{{ object.air_option_name }}</h4>
+    <hr size="1">
+    <h4><strong>Passenger Count: </strong>{{ object.passenger_count }}</h4>
+    <hr size="1">
+    <h4><strong>Air Rate: </strong>{{ object.air_rate }}</h4>
+    <hr size="1">
+    <h4><strong>Air Fees: </strong>{{ object.air_fees }}</h4>
+    <hr size="1">
+    <h4><strong>Air Taxes: </strong>{{ object.air_taxes }}</h4>
+    <hr size="1">
+    <h4><strong>Air Discount: </strong>{{ object.air_discount }}</h4>
+    <hr size="1">
+    <h4><strong>Commit Deadline: </strong>{{ object.commit_deadline }}</h4>
+    <hr size="1">
+    <h4><strong>Payment Deadline: </strong>{{ object.payment_deadline }}</h4>
+    <hr size="1">
+    <h4><strong>Ticket Deadline: </strong>{{ object.ticket_deadline }}</h4>
+    <hr size="1">
+    <h4><strong>Utilize Deadline: </strong>{{ object.utilize_deadline }}</h4>
+    <hr size="1">
+    <h4><strong>Departure Date: </strong>{{ object.departure_date }}</h4>
+    <hr size="1">
+    <h4><strong>Return Date: </strong>{{ object.return_date }}</h4>
+    <hr size="1">
+    <h4><strong>Flight Legs: </strong><span><a href="/details-flight-leg/{{ object.id }}" style="color: teal">{{ object.flight_legs }}</a></span></h4>
+    <hr size="1">
+
+
+</div>
+{% else %}
+ <form class="form-inline ml-auto">
+    <a href="{% url 'login' %}" class="btn btn-outline-secondary">
+      Log In</a>
+    <a href="{% url 'signup' %}" class="btn btn-primary ml-2">
+      Sign up</a>
+</form>
+{% endif %}
+{% endblock content %}

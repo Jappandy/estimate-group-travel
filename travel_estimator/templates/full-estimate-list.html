@@ -1,0 +1,42 @@
+{% extends 'base.html' %}<!doctype html>
+
+{% load static %}
+
+
+{% block title %} List of Accounts {% endblock title %}
+
+
+{% block content %}
+<div class="container my-5" style="color: #212529">
+    <h1><strong><center>Account List</center></strong></h1>
+</div>
+<div class="container">
+{% if user.is_authenticated %}
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th><h3><strong>NAME</strong></h3></th>
+            <th><h3><strong>CREATED DATE</strong></h3></th>
+            <th><h3><strong>ACTIONS</strong></h3></th>
+        </tr> 
+        </thead>
+        <tbody>
+            {% for item in full_estimate_list %}
+            <tr>
+                <th><h5><a href="/details-full-estimate/{{ item.account_id }}/" \
+                style="color: teal">{{ item.account_name }}</a></h5></th>
+                <th><h5>{{ item.created_at }}</h5></th>
+                <th><a href="/update-full-estimate-form/{{ item.account_id }}/edit" \
+                id="update_full_estimate_form">
+                <i class="fa fa-lg fa-pencil text-info"></i></a></th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+<p>You are not logged in</p>
+<p><a href="{% url 'login' %}">Log In</a></p>
+<p><a href="{% url 'signup' %}">Sign Up </a></p>
+</div>
+{% endif %}
+{% endblock content %}

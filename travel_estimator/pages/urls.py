@@ -1,17 +1,58 @@
 from django.urls import path
-
+from estimates import views
 from .views import HomePageView
-from estimates.views import EstimateListView
-from estimates.views import CreateEstimateView, UpdateEstimateView
+from estimates.views import(EstimateListView, CreateEstimateView, 
+UpdateEstimateView,EstimateDetailView, EstimatePDFDetailView,
+    CreateAirHotelTransferEstimateView, UpdateAirHotelTransferEstimateView, 
+    FullEstimateDetailView, FullEstimateListView,
+    CreateGroupAirView, UpdateGroupAirView, GroupAirDetailView, 
+    CreateAirOptionView, UpdateAirOptionView, AirOptionDetailView,
+    CreateFlightLegView, UpdateFlightLegView, FlightLegDetailView,
+    CreateGroupHotelView, UpdateGroupHotelView, GroupHotelDetailView,
+    CreateHotelOptionView, UpdateHotelOptionView, HotelOptionDetailView,
+    CreateGroupTransferView, UpdateGroupTransferView, GroupTransferDetailView,
+    CreateGroundOptionView, UpdateGroundOptionView, GroundOptionDetailView,
+    SearchFlightsTemplateView, GeneratePdf,
+    )
 
- 
 
 urlpatterns = [
     path('', EstimateListView.as_view(), name='home'),
+        path('full-estimate-list/', FullEstimateListView.as_view(), name='full-estimate-list'),
+    # path('estimate-list/',EstimateListView.as_view(), name='estimate-list'),
+    path('pdf/estimate-invoice/', GeneratePdf.as_view(), name='estimate-invoice'),
+    path('search-flights/', SearchFlightsTemplateView.as_view(), name='search-flights'),
     path('add-estimate-form/', CreateEstimateView.as_view(), name='add-estimate-form'),
-    path('estimate-update-form/', UpdateEstimateView.as_view(), name='estimate-update-form'),
+    path('update-estimate-form/<int:pk>/edit', UpdateEstimateView.as_view(), name='update-estimate-form'),
+    path('details-estimate-output/<int:pk>/', EstimatePDFDetailView.as_view(), name='details-estimate-output'),
+    path('details-estimate/<int:pk>/', EstimateDetailView.as_view(), name='details-estimate'),
+    # path('details-estimate/pdf/', views.some_view, name='some_view'),
+    path('add-full-estimate-form/', CreateAirHotelTransferEstimateView.as_view(), name='add-full-estimate-form'),
+    path('update-full-estimate-form/<int:pk>/edit', UpdateAirHotelTransferEstimateView.as_view(), name='update-full-estimate-form'),
+    path('details-full-estimate/<int:pk>/', FullEstimateDetailView.as_view(), name='detail-full-estimate'),
+    path('add-group-air-form/', CreateGroupAirView.as_view(), name='add-group-air-form'),
+    path('update-group-air-form/<int:pk>/edit', UpdateGroupAirView.as_view(), name='update-group-air-form'),
+    path('details-group-air/<int:pk>/', GroupAirDetailView.as_view(), name='detail-group-air'),
+    path('add-air-option-form/', CreateAirOptionView.as_view(), name='add-air-option-form'),
+    path('update-air-option-form/<int:pk>/edit', UpdateAirOptionView.as_view(), name='update-air-option-form'),
+    path('details-air-option/<int:pk>/', AirOptionDetailView.as_view(), name='detail-air-option'),
+    path('add-flight-leg-form/', CreateFlightLegView.as_view(), name='add-flight-leg-form'),
+    path('update-flight-leg-form/<int:pk>/edit', UpdateFlightLegView.as_view(), name='update-flight-leg-form'),
+    path('details-flight-leg/<int:pk>/', FlightLegDetailView.as_view(), name='detail-flight-leg'),
+    path('add-group-hotel-form/', CreateGroupHotelView.as_view(), name='add-group-hotel-form'),
+    path('update-group-hotel-form/<int:pk>/edit', UpdateGroupHotelView.as_view(), name='update-group-hotel-form'),
+    path('details-group-hotel/<int:pk>/', GroupHotelDetailView.as_view(), name='detail-group-hotel'),
+    path('add-hotel-option-form/', CreateHotelOptionView.as_view(), name='add-hotel-option-form'),
+    path('update-hotel-option-form/<int:pk>/edit', UpdateHotelOptionView.as_view(), name='update-hotel-option-form'),
+    path('details-hotel-option/<int:pk>/', HotelOptionDetailView.as_view(), name='detail-hotel-option'),
+    path('add-group-transfer-form/', CreateGroupTransferView.as_view(), name='add-group-transfer-form'),
+    path('update-group-transfer-form/<int:pk>/edit', UpdateGroupTransferView.as_view(), name='update-group-transfer-form'),
+    path('details-group-transfer/<int:pk>/', GroupTransferDetailView.as_view(), name='detail-group-transfer'),
+    path('add-ground-option-form/', CreateGroundOptionView.as_view(), name='add-ground-option-form'),
+    path('update-ground-option-form/<int:pk>/edit', UpdateGroundOptionView.as_view(), name='update-ground-option-form'),
+    path('details-ground-option/<int:pk>/', GroundOptionDetailView.as_view(), name='detail-ground-option'),
+    
+    # path('group-air-form/<int:pk>/edit', GroupAirEditPopup, name = 'group-air-edit'),
+    # path('group-air-form/ajax/get_group_air_id', get_group_air_id, name = 'get-group_air-id'),
 ]
 
-# urlpatterns = [
-#     path('', HomePageView.as_view(), name='home'),
-# ]

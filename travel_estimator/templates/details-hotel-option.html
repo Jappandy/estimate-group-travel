@@ -1,0 +1,51 @@
+{% extends 'base.html' %}<!doctype html>
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Hotel Option Details{% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <div class="float-to-right" display="block">
+  <span><a href="/update-hotel-option-form/{{ object.id }}/edit" \
+    id="update_hotel_option_form"><i class="text-info fa fa-lg fa-pencil" style="float: right; padding-right:15px;" \
+    data-toggle="tooltip" title="Edit Estimate"> EDIT</i></a></span>
+    </div>
+<div class="container-fluid">
+  <div class="my-3" style="color:#212529">
+  <h1><center><strong>Hotel Option Details</strong></center></h1>
+  </div>
+    <!--{{ form|crispy }}-->
+    <hr size="1">
+    <h4><strong>Hotel Option Name: </strong>{{ object.hotel_option_name }}</h4>
+    <hr size="1">
+    <h4><strong>Hotel Name: </strong>{{ object.hotel_name }}</h4>
+    <hr size="1">
+    <h4><strong>Room Type: </strong>{{ object.room_type }}</h4>
+    <hr size="1">
+    <h4><strong>Check In: </strong>{{ object.check_in }}</h4>
+    <hr size="1">
+    <h4><strong>Check Out: </strong>{{ object.check_out }}</h4>
+    <hr size="1">
+    <h4><strong>Number of Nights: </strong>{{ object.number_of_nights }}</h4>
+    <hr size="1">  
+    <h4><strong>Number of Rooms: </strong>{{ object.number_of_rooms }}</h4>
+    <hr size="1">   
+    <h4><strong>Hotel Rate: </strong>{{ object.hotel_rate }}</h4>
+    <hr size="1">    
+    <h4><strong>Hotel Fees: </strong>{{ object.hotel_fees }}</h4>
+    <hr size="1">    
+    <h4><strong>Hotel Taxes: </strong>{{ object.hotel_taxes }}</h4>
+    <hr size="1">    
+
+
+</div>
+{% else %}
+ <form class="form-inline ml-auto">
+    <a href="{% url 'login' %}" class="btn btn-outline-secondary">
+      Log In</a>
+    <a href="{% url 'signup' %}" class="btn btn-primary ml-2">
+      Sign up</a>
+</form>
+{% endif %}
+{% endblock content %}

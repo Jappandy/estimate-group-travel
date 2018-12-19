@@ -1,0 +1,83 @@
+{% extends 'base-raw.html' %}<!doctype html>
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Group Air Form{% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated %}
+
+<div class="container">
+  <h2>Modal Group Air</h2>
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-default btn-lg" id="myBtn">Login</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="padding:35px 50px;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4><span class="glyphicon glyphicon-plane"></span> Group Air</h4>
+        </div>
+        <div class="modal-body" style="padding:40px 50px;">
+          <form role="form">
+            <div class="form-group">
+              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+              <input type="text" class="form-control" id="usrname" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+              <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+              <input type="text" class="form-control" id="psw" placeholder="Enter password">
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value="" checked>Remember me</label>
+            </div>
+              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+          <p>Not a member? <a href="#">Sign Up</a></p>
+          <p>Forgot <a href="#">Password?</a></p>
+        </div>
+      </div>
+      
+    </div>
+  </div> 
+</div>
+
+
+
+
+
+
+
+
+
+<div class="container-fluid">
+<h1>Add New Group Air</h1>
+<p>Fill out the fields below.</p>
+
+<form method = 'POST'>
+    {% csrf_token %}
+    {{ form|crispy }} 
+    <!--{% crispy form form.helper %}-->
+
+    
+    <br><br>
+    <input class="btn btn-success" type="submit" value="Add Group Air">
+</form>
+</div>
+{% else %}
+ <form class="form-inline ml-auto">
+    <a href="{% url 'login' %}" class="btn btn-outline-secondary">
+      Log In</a>
+    <a href="{% url 'signup' %}" class="btn btn-primary ml-2">
+      Sign up</a>
+</form>
+{% endif %}
+{% endblock content %}

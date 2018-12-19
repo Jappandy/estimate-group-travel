@@ -1,0 +1,56 @@
+{% extends 'base.html' %}<!doctype html>
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Group Air Form{% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <div class="float-to-right" display="block">
+  <span><a href="/update-estimate-form/{{ object.estimate_id }}/edit" \
+    id="update_estimate_form"><i class="text-info fa fa-lg fa-pencil" \
+    style="float: right; padding-right:15px;" data-toggle="tooltip" \
+    title="Edit Estimate"> EDIT</i></a></span>
+    </div>
+<div class="container-fluid">
+  <div style="color:#212529">
+  <h1><strong><center>Estimate Details</center></strong></h1>
+  </div>
+    <!--{{ form|crispy }}-->
+    
+    <hr size="1">
+    <h4><strong>Estimate Name: </strong>{{ object.estimate_name }}</h4>
+    <hr size="1">
+    <h4><strong>Estimate Status: </strong>{{ object.estimate_status }}</h4>
+    <hr size="1">
+    <h4><strong>Details: </strong>{{ object.details }}</h4>
+    <hr size="1">
+    <h4><strong>Travel Start Date: </strong>{{ object.start_date }}</h4>
+    <hr size="1">
+    <h4><strong>Travel End Date: </strong>{{ object.end_date }}</h4>
+    <hr size="1">
+    <h4><strong>Number of People: </strong>{{ object.number_of_people }}</h4>
+    <hr size="1">
+    <h4><strong>Agent on Account: </strong>{{ object.agent }}</h4>
+    <hr size="1">
+    <h4><strong>Payment Status: </strong>{{ object.payment_status }} </h4>
+    <hr size="1">
+    <h4><strong>Destination: </strong>{{ object.destination }}</h4>
+    <hr size="1">
+    <h4><strong>Group Air: </strong><span><a href="/details-group-air/{{ object.estimate_id }}" style="color: teal">{{ object.group_air }}</a></span></h4>
+    <hr size="1">
+        <h4><strong>Group Hotel: </strong><span><a href="/details-group-hotel/{{ object.estimate_id }}" style="color: teal">{{ object.group_hotel }}</a></span></h4>
+    <hr size="1">
+        <h4><strong>Group Transfer: </strong><span><a href="/details-group-transfer/{{ object.estimate_id }}" style="color: teal">{{ object.group_transfer }}</a></span></h4>
+    <hr size="1">
+
+</div>
+{% else %}
+ <form class="form-inline ml-auto">
+    <a href="{% url 'login' %}" class="btn btn-outline-secondary">
+      Log In</a>
+    <a href="{% url 'signup' %}" class="btn btn-primary ml-2">
+      Sign up</a>
+</form>
+{% endif %}
+{% endblock content %}

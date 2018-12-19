@@ -1,0 +1,48 @@
+{% extends 'base.html' %}<!doctype html>
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Add Full Estimate{% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated %}
+
+<div class="container-fluid">
+<h1>Full Estimate</h1>
+<p>This should be harmless...</p>
+
+
+
+<!--<div class="row flex justify-content-center align-items-center">-->
+<!--   <div class="form-actions"> -->
+<!-- <form class="form-inline ml-auto">-->
+<!--    <a href="{% url 'add-estimate-form' %}" class="btn btn-outline-info ml-2">-->
+<!--      Add Estimate</a>-->
+<!--    <a href="{% url 'add-group-air-form' %}" class="btn btn-outline-info ml-2">-->
+<!--      Add Group Air</a>-->
+<!--    <a href="{% url 'add-group-hotel-form' %}" class="btn btn-outline-info ml-2">-->
+<!--      Add Group Hotel</a>-->
+<!--      <a href="{% url 'add-group-transfer-form' %}" class="btn btn-outline-info ml-2">-->
+<!--      Add Group Transfers</a>-->
+<!--</form>-->
+<!--</div>-->
+<!--</div>-->
+
+<form method = 'POST'>
+    {% csrf_token %}
+   {% crispy form form.helper %}
+    
+    <input class="btn btn-success" type="submit" value="Complete Estimate" />
+</form>
+</div>
+
+{% else %}
+ <form class="form-inline ml-auto">
+    <a href="{% url 'login' %}" class="btn btn-outline-secondary">
+      Log In</a>
+    <a href="{% url 'signup' %}" class="btn btn-primary ml-2">
+      Sign up</a>
+</form>
+{% endif %}
+{% endblock content %}

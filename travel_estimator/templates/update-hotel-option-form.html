@@ -3,20 +3,19 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-{% block title %}Add Estimate{% endblock title %}
+{% block title %}Update Hotel Option{% endblock title %}
 
 {% block content %}
 {% if user.is_authenticated %}
 
 <div class="container-fluid">
-<h1>Add New Estimate</h1>
-<p>This should be harmless...</p>
+<h1>Update Hotel Option</h1>
+<p>This try this without any errors :)...</p>
 
-<form method = 'POST'>
+<form method="POST">
     {% csrf_token %}
-    {% crispy form form.helper %}    
-   
-    <input class="btn btn-success" type="submit" value="Add New Estimate" />
+    {{ form|crispy }}
+    <input class="btn btn-success" type="submit" value="Update">
 </form>
 </div>
 {% else %}

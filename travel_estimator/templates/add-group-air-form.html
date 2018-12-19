@@ -3,20 +3,20 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-{% block title %}Add Estimate{% endblock title %}
+{% block title %}Group Air Form{% endblock title %}
 
 {% block content %}
 {% if user.is_authenticated %}
-
 <div class="container-fluid">
-<h1>Add New Estimate</h1>
-<p>This should be harmless...</p>
+<h1>Add New Group Air</h1>
+<p>Fill out the fields below.</p>
 
 <form method = 'POST'>
     {% csrf_token %}
-    {% crispy form form.helper %}    
-   
-    <input class="btn btn-success" type="submit" value="Add New Estimate" />
+    {% crispy form form.helper %}
+
+
+    <input class="btn btn-success" type="submit" value="Add Group Air" />
 </form>
 </div>
 {% else %}

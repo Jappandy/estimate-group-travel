@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from .models import Estimate, GroupAir, GroupHotel, GroupTransfer, FlightLeg, AirOption, HotelOption, GroundOption 
+from .models import(AirHotelTransferEstimate, Estimate, GroupAir, GroupHotel,
+    GroupTransfer, FlightLeg, AirOption, HotelOption, GroundOption)
 
 
 class EstimateAdmin(admin.ModelAdmin):
@@ -17,6 +18,7 @@ class EstimateAdmin(admin.ModelAdmin):
 #     class Meta:
 #         model = GroupAir
 
+admin.site.register(AirHotelTransferEstimate)
 admin.site.register(Estimate)
 admin.site.register(GroupAir)
 admin.site.register(FlightLeg)
