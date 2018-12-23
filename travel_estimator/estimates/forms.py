@@ -1,15 +1,11 @@
 from django import forms
 from django.contrib.auth import get_user_model
-# from django.utils.text import slugify
-
 from estimates.models import (AirHotelTransferEstimate, Estimate, GroupTransfer,
     GroundOption, GroupHotel, HotelOption, GroupAir, AirOption, FlightLeg)
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset
 
-# from django.forms.models import inlineformset_factory
-# from django.forms.models import BaseInlineFormSet
 
 
 ##################################################################
@@ -173,8 +169,3 @@ class GroupAirForm(forms.ModelForm):
     class Meta:
         model = GroupAir
         fields = '__all__'
-
-# Inline forms
-# EstimateGroupAirInlineFormSet = inlineformset_factory(GroupAir, Estimate, form=EstimateForm, extra=1, can_delete=False)
-# EstimateGroupHotelInlinFormSet = inlineformset_factory(GroupHotel, Estimate, form=EstimateForm, extra=1, can_delete=False)
-# EstimateGroupTransferInlineFormSet = inlineformset_factory(GroupTransfer, Estimate, form=EstimateForm, extra=1, can_delete=False)

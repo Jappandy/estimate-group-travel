@@ -207,19 +207,6 @@ class Estimate(models.Model):
     def get_absolute_url(self):
         return reverse('details_estimate', args=[str(self.id)])
     
-    # def save(self, *args, **kwargs):
-    #     new_obj = self.save(commit=False)
-    #     new_obj.save()
-        
-    #     group_air = self.group_air
-    #     group_air.save_m2m()
-        
-    #     group_hotel = self.group_hotel
-    #     group_hotel.save_m2m()
-        
-    #     group_transfer = self.group_transfer
-    #     group_transfer.save_m2m()
-    #     return super(Estimate, self).save(*args, **kwargs)   
     
 
 

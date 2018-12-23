@@ -11,21 +11,24 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DJANGO_PROJECT_DIR = os.path.dirname(BASE_DIR)
+PROJECT_DIR = os.path.dirname(DJANGO_PROJECT_DIR)
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'DJANGO KEY'
+SECRET_KEY = ')ft8^429bdhuk4$)*^ph#2fov*mwd88r^r5)xn_f!485@%gpvg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['estimate-group-travel-japandy.c9users.io']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     
+    
     ## 3rd PARTY APPS
     'crispy_forms',
     
@@ -47,7 +51,8 @@ INSTALLED_APPS = [
     'allauth', 
     'allauth.account', 
     'allauth.socialaccount', 
-    'allauth.socialaccount.providers.google', 
+    # 'allauth.socialaccount.providers.google', 
+    
     
     ## MY APPS
     'users.apps.UsersConfig',
@@ -55,9 +60,13 @@ INSTALLED_APPS = [
     'estimates.apps.EstimatesConfig',
 ]
 
+
+
 TIME_ZONE = 'America/Los_Angeles'
 
+
 AUTH_USER_MODEL = 'users.CustomUser'
+
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
@@ -65,15 +74,19 @@ LOGOUT_REDIRECT_URL = 'home'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
+
 ROOT_URLCONF = 'travel_estimator.urls'
+
 
 TEMPLATES = [
     {
@@ -93,6 +106,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'travel_estimator.wsgi.application'
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
@@ -141,8 +155,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+
+
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
@@ -154,19 +170,26 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
+
 SITE_ID = 1
+
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 
+
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
-<<<<<<< HEAD
-=======
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = 'HOST PASSWORD KEY'
+EMAIL_HOST_PASSWORD = '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'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
->>>>>>> 735737a084e647bb4e56ffafa36cccd16b64f180
+
+django_heroku.settings(locals())

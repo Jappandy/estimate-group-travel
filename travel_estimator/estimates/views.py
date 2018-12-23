@@ -2,7 +2,6 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.template.loader import render_to_string
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse, FileResponse
-# from django.forms.formsets import formset_factory
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin
 from django.views.generic.edit import UpdateView
@@ -14,8 +13,6 @@ from estimates.models import(AirHotelTransferEstimate, Estimate, GroupAir, AirOp
     FlightLeg, GroupHotel, HotelOption, GroupTransfer, GroundOption,)
 from estimates.forms import(AirHotelTransferEstimateForm, EstimateForm, AirOptionForm, 
     GroupAirForm, FlightLegForm, GroupHotelForm, HotelOptionForm, GroupTransferForm, GroundOptionForm)
-    
-#from estimates.forms import EstimateFormset
 from reportlab.pdfgen import canvas
 from estimates.utils import render_to_html_pdf
 from estimates.pdfs import render_to_pdf
@@ -131,12 +128,6 @@ class EstimateListView(LoginRequiredMixin, ListView):
     queryset = Estimate.objects.all()
     context_object_name = 'estimate_list'
     
-	#queryset = Estimate.objects.all()
-	#context_object_name = 'objects'
-	#paginate_by = 10
-	
-	#context_object_name = 'estimate_list'   
-    #estimates = Estimate.objects.all()
 
 
 ### ESTIMATE CREATE
