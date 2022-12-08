@@ -6,7 +6,7 @@ Pillow==5.3.0
 PyPDF2==1.26.0
 Pyphen==0.9.5
 cairocffi==0.9.0
-certifi==2018.10.15
+certifi==2022.12.7
 cffi==1.11.5
 chardet==3.0.4
 cssselect2==0.2.1
